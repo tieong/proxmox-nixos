@@ -38,6 +38,10 @@ stdenv.mkDerivation rec {
     cp api-viewer/APIViewer.js $out/share/javascript/proxmox-widget-toolkit
   '';
 
+  postFixup = ''
+    sed -i '/.*data.status.*{/{s/!//;s/active/NoMoreNagging/}' $out/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
+  '';
+
   passthru.updateScript = [
     ../update.py
     pname
