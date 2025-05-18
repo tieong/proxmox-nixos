@@ -6,6 +6,7 @@
   dtach,
   lxc,
   openssh,
+  util-linux,
   tzdata,
 }:
 
@@ -60,6 +61,7 @@ perl538.pkgs.toPerlModule (
       find $out -type f | xargs sed -i \
         -e "s|/usr/bin/dtach|${dtach}/bin/dtach|" \
         -e "s|/usr/bin/ssh|${openssh}/bin/ssh|" \
+        -e "s|mkfs.ext4|${util-linux}/bin/mkfs|" \
         -e "s|/usr/bin/vncterm||" \
         -e "s|/usr/bin/termproxy||" \
         -e "s|/usr/bin/lxc|${lxc}/bin/lxc|" \
