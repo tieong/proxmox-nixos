@@ -1,0 +1,26 @@
+From 896b7d2192a1e0d55953143f41d5faa67cd8e277 Mon Sep 17 00:00:00 2001
+From: Thomas Ieong <th.ieong@free.fr>
+Date: Fri, 23 May 2025 16:49:58 +0200
+Subject: [PATCH] fix: Openssh deprecated dsa keys
+
+---
+ src/PVE/LXC/Setup/Base.pm | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/src/PVE/LXC/Setup/Base.pm b/src/PVE/LXC/Setup/Base.pm
+index bb084af..4466753 100644
+--- a/src/PVE/LXC/Setup/Base.pm
++++ b/src/PVE/LXC/Setup/Base.pm
+@@ -636,7 +636,6 @@ sub ssh_host_key_types_to_generate {
+ 
+     return {
+ 	rsa => 'ssh_host_rsa_key',
+-	dsa => 'ssh_host_dsa_key',
+ 	ecdsa => 'ssh_host_ecdsa_key',
+ 	ed25519 => 'ssh_host_ed25519_key',
+     };
+
+base-commit: bd401aced1e58ea724fadcde73a3a5a8bb6d4abc
+-- 
+2.49.0
+
