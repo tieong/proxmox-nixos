@@ -3,7 +3,6 @@
   stdenv,
   fetchgit,
   perl538,
-  pve-container,
   dtach,
   lxc,
   openssh,
@@ -12,11 +11,7 @@
 }:
 
 let
-  perlDeps =
-    with perl538.pkgs;
-    [
-      pve-container
-    ];
+  perlDeps = [];
   perlEnv = perl538.withPackages (_: perlDeps);
 in
 
