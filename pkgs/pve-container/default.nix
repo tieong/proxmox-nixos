@@ -6,12 +6,15 @@
   dtach,
   lxc,
   openssh,
+  pve-guest-common,
   util-linux,
   tzdata,
 }:
 
 let
-  perlDeps = [];
+  perlDeps = [
+    pve-guest-common
+  ];
   perlEnv = perl538.withPackages (_: perlDeps);
 in
 
@@ -74,6 +77,10 @@ perl538.pkgs.toPerlModule (
         -e "s|/usr/share/zoneinfo|${tzdata}/share/zoneinfo|"
       find $out/share/lxc -type f | xargs sed -i \
         -e "s|/usr/bin/perl|${perl538}/bin/perl|"
+
+      sed -i $out/share/lxc/hooks/lxc-pve-prestart-hook \
+        -e "s/-T//" \
+        -e "1s|$| -I$out/${perl538.libPrefix}/${perl538.version}|"
     '';
 
     passthru.updateScript = [
