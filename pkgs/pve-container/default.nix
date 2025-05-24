@@ -6,6 +6,9 @@
   dtach,
   lxc,
   openssh,
+  pve-common,
+  pve-cluster,
+  pve-storage,
   pve-guest-common,
   util-linux,
   tzdata,
@@ -14,6 +17,9 @@
 let
   perlDeps = [
     pve-guest-common
+    pve-common
+    pve-cluster
+    pve-storage
   ];
   perlEnv = perl538.withPackages (_: perlDeps);
 in
