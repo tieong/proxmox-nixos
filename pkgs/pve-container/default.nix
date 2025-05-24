@@ -72,7 +72,7 @@ perl538.pkgs.toPerlModule (
         -e "s|/usr/bin/lxc|${lxc}/bin/lxc|" \
         -e "s|/usr/share/lxc|$out/share/lxc|" \
         -e "s|/usr/share/zoneinfo|${tzdata}/share/zoneinfo|"
-      find $out/share/lxc -type -f | xargs sed -i \
+      find $out/share/lxc -type f | xargs sed -i \
         -e "s|/usr/bin/perl|${perl538}/bin/perl|"
     '';
 
