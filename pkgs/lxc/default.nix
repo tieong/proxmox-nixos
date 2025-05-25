@@ -85,8 +85,8 @@ stdenv.mkDerivation (finalAttrs: {
     substituteInPlace $out/share/lxc/config/oci.common.conf --replace-fail "$out/share" "/run/current-system/sw/share"
 
     sed -i $out/libexec/lxc/lxc-containers \
-      -e "s|touch|${gnutar}/bin/touch|" \
-      -e "s|rm|${gnutar}/bin/rm"
+      -e "s|touch|${coreutils}/bin/touch|" \
+      -e "s|rm|${coreutils}/bin/rm"
   '';
 
   enableParallelBuilding = true;
