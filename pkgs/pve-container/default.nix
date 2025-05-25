@@ -82,9 +82,16 @@ perl538.pkgs.toPerlModule (
         -e "s|/usr/bin/lxc|${lxc}/bin/lxc|" \
         -e "s|/usr/share/lxc|$out/share/lxc|" \
         -e "s|/usr/share/zoneinfo|${tzdata}/share/zoneinfo|"
-      find $out/share/lxc -type f | xargs sed -i \
-        -e "s|/usr/bin/perl|${perl538}/bin/perl|"
+
+        patchShebangs $out/share/lxc/lxcnetaddbr
+        patchShebangs $out/share/lxc/pve-container-stop-wrapper
+        patchShebangs $out/share/lxc/hooks/lxc-pve-autodev-hook
+        patchShebangs $out/share/lxc/hooks/lxc-pve-prestart-hook
+        patchShebangs $out/share/lxc/hooks/lxc-pve-poststop-hook
     '';
+
+        #   find $out/share/lxc -type f | xargs sed -i \
+        # -e "s|/usr/bin/perl|${perl538}/bin/perl|"
 
     passthru.updateScript = [
       ../update.py
