@@ -9,6 +9,8 @@
   pve-guest-common,
   pve-qemu-server,
   pve-storage,
+  gnutar,
+  xz,
   pve-qemu,
   enableLinstor ? false,
 }:
@@ -73,7 +75,7 @@ perl538.pkgs.toPerlModule (
     postFixup = ''
       for bin in $out/bin/*; do
         wrapProgram $bin \
-          --prefix PATH : ${lib.makeBinPath [ pve-qemu ]} \
+          --prefix PATH : ${lib.makeBinPath [ pve-qemu gnutar xz ]} \
           --prefix PERL5LIB : $out/${perl538.libPrefix}/${perl538.version}
       done      
     '';
