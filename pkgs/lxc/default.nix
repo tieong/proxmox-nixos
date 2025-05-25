@@ -86,7 +86,7 @@ stdenv.mkDerivation (finalAttrs: {
 
     sed -i $out/libexec/lxc/lxc-containers \
       -e "s|touch|${coreutils}/bin/touch|" \
-      -e "s|rm|${coreutils}/bin/rm"
+      -e "s|rm|${coreutils}/bin/rm|"
   '';
 
   enableParallelBuilding = true;
