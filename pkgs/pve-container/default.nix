@@ -90,9 +90,6 @@ perl538.pkgs.toPerlModule (
         patchShebangs $out/share/lxc/hooks/lxc-pve-poststop-hook
     '';
 
-        #   find $out/share/lxc -type f | xargs sed -i \
-        # -e "s|/usr/bin/perl|${perl538}/bin/perl|"
-
     passthru.updateScript = [
       ../update.py
       pname
