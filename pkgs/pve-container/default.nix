@@ -86,7 +86,7 @@ perl538.pkgs.toPerlModule (
         -e "s|/usr/share/zoneinfo|${tzdata}/share/zoneinfo|"
 
       sed -i $out/lib/perl5/site_perl/5.38.2/PVE/LXC/Create.pm \
-        -e "s|'tar'|'${gnutar}'"
+        -e "s|'tar'|'${gnutar}'|"
 
       sed -i $out/lib/perl5/site_perl/5.38.2/PVE/LXC/Create.pm \
         -e "s|$mechanism eq '${gnutar}'|$mechanism eq 'tar'|"
