@@ -8,6 +8,8 @@
   openssh,
   pve-common,
   pve-cluster,
+  gnutar,
+  xz,
   pve-storage,
   pve-guest-common,
   e2fsprogs,
@@ -82,6 +84,12 @@ perl538.pkgs.toPerlModule (
         -e "s|/usr/bin/lxc|${lxc}/bin/lxc|" \
         -e "s|/usr/share/lxc|$out/share/lxc|" \
         -e "s|/usr/share/zoneinfo|${tzdata}/share/zoneinfo|"
+
+      sed -i $out/lib/perl5/site_perl/5.38.2/PVE/LXC/Create.pm \
+        -e "s|'tar'|'${gnutar}'"
+
+      sed -i $out/lib/perl5/site_perl/5.38.2/PVE/LXC/Create.pm \
+        -e "s|$mechanism eq '${gnutar}'|$mechanism eq 'tar'|"
 
         patchShebangs $out/share/lxc/lxcnetaddbr
         patchShebangs $out/share/lxc/pve-container-stop-wrapper
