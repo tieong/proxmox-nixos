@@ -10,7 +10,7 @@
   pve-cluster,
   pve-firewall,
   gnutar,
-  iproute2
+  iproute2,
   xz,
   pve-storage,
   pve-guest-common,
