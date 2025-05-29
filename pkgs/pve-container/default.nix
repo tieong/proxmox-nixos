@@ -107,6 +107,18 @@ perl538.pkgs.toPerlModule (
       sed -i $out/share/lxc/hooks/lxc-pve-prestart-hook \
         -e "s/-T//" \
         -e "1s|$| -I$out/${perl538.libPrefix}/${perl538.version}|"
+
+      sed -i $out/share/lxc/hooks/lxc-pve-autodev-hook \
+        -e "s/-T//" \
+        -e "1s|$| -I$out/${perl538.libPrefix}/${perl538.version}|"
+
+     sed -i $out/share/lxc/hooks/lxc-pve-poststop-hook \
+        -e "s/-T//" \
+        -e "1s|$| -I$out/${perl538.libPrefix}/${perl538.version}|"
+
+     sed -i $out/share/lxc/hooks/lxcnetaddbr \
+        -e "s/-T//" \
+        -e "1s|$| -I$out/${perl538.libPrefix}/${perl538.version}|"
     '';
 
     passthru.updateScript = [
