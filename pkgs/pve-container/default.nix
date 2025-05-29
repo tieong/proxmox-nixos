@@ -92,6 +92,7 @@ perl538.pkgs.toPerlModule (
         -e "s|mkfs.ext4|${e2fsprogs}/bin/mkfs.ext4|" \
         -e "s|lxc-start --version|${lxc}/bin/lxc-start --version|" \
         -e "s|/sbin/ip|${iproute2}/bin/ip|" \
+        -e "s|'mount'|'${util-linux}/bin/mount'|" \
         -e "s|'umount'|'${util-linux}/bin/umount'|" \
         -e "s|'/bin/umount'|'${util-linux}/bin/umount'|" \
         -e "s|lxc-console|${lxc}/bin/lxc-console|" \
