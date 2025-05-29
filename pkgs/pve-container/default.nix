@@ -12,7 +12,7 @@
   gnutar,
   iproute2,
   termproxy,
-  vncserver,
+  vncterm,
   xz,
   pve-storage,
   pve-guest-common,
