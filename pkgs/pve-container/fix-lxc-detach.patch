@@ -9,8 +9,8 @@ Subject: [PATCH] fix: force detach lxc rootdir
 
 diff --git a/src/PVE/LXC.pm b/src/PVE/LXC.pm
 index 2b9f0cf..119be2a 100644
---- a/src/PVE/LXC.pm
-+++ b/src/PVE/LXC.pm
+--- a/PVE/LXC.pm
++++ b/PVE/LXC.pm
 @@ -1561,7 +1561,7 @@ sub umount_all {
  	return if !PVE::ProcFSTools::is_mounted($mount_path);
  
