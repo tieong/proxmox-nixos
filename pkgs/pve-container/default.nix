@@ -96,11 +96,15 @@ perl538.pkgs.toPerlModule (
       sed -i $out/lib/perl5/site_perl/5.38.2/PVE/LXC/Create.pm \
         -e "s|$mechanism eq '${gnutar}'|$mechanism eq 'tar'|"
 
-        patchShebangs $out/share/lxc/lxcnetaddbr
-        patchShebangs $out/share/lxc/pve-container-stop-wrapper
-        patchShebangs $out/share/lxc/hooks/lxc-pve-autodev-hook
-        patchShebangs $out/share/lxc/hooks/lxc-pve-prestart-hook
-        patchShebangs $out/share/lxc/hooks/lxc-pve-poststop-hook
+      patchShebangs $out/share/lxc/lxcnetaddbr
+      patchShebangs $out/share/lxc/pve-container-stop-wrapper
+      patchShebangs $out/share/lxc/hooks/lxc-pve-autodev-hook
+      patchShebangs $out/share/lxc/hooks/lxc-pve-prestart-hook
+      patchShebangs $out/share/lxc/hooks/lxc-pve-poststop-hook
+
+      sed -i $out/share/lxc/hooks/lxc-pve-prestart-hook \
+        -e "s/-T//" \
+        -e "1s|$| -I$out/${perl538.libPrefix}/${perl538.version}|"
     '';
 
     passthru.updateScript = [
