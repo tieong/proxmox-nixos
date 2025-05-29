@@ -92,7 +92,6 @@ perl538.pkgs.toPerlModule (
         -e "s|mkfs.ext4|${e2fsprogs}/bin/mkfs.ext4|" \
         -e "s|lxc-start --version|${lxc}/bin/lxc-start --version|" \
         -e "s|/sbin/ip|${iproute2}/bin/ip|" \
-        -e "s|'mount'|'${util-linux}/bin/mount'|" \
         -e "s|'umount'|'${util-linux}/bin/umount'|" \
         -e "s|'/bin/umount'|'${util-linux}/bin/umount'|" \
         -e "s|lxc-console|${lxc}/bin/lxc-console|" \
@@ -112,6 +111,12 @@ perl538.pkgs.toPerlModule (
 
       sed -i $out/lib/perl5/site_perl/5.38.2/PVE/LXC/Create.pm \
         -e "s|$mechanism eq '${gnutar}'|$mechanism eq 'tar'|"
+
+      sed -i $out/lib/perl5/site_perl/5.38.2/PVE/LXC.pm \
+        -e "s|'mount'|'${util-linux}/bin/mount'|" \
+
+      sed -i $out/lib/perl5/site_perl/5.38.2/PVE/VZDump/LXC.pm \
+        -e "s|'mount'|'${util-linux}/bin/mount'|" \
 
       patchShebangs $out/share/lxc/lxcnetaddbr
       patchShebangs $out/share/lxc/pve-container-stop-wrapper
