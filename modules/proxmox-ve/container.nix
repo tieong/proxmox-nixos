@@ -125,20 +125,20 @@ lib.mkIf config.services.proxmox-ve.enable {
       after = [ "lxc.service" ];
       wants = [ "lxc.service" ];
       unitConfig = {
-        DefaultDependencies = false;
+        DefaultDependencies = "no";
         Documentation = "man:lxc-start man:lxc man:pct";
       };
       serviceConfig = {
         Type = "simple";
-        Delegate = true;
+        Delegate = "yes";
         KillMode = "mixed";
-        TimeoutStopSec = 120;
+        TimeoutStopSec = "120s";
         ExecStart = "${pkgs.lxc}/bin/lxc-start -F -n %i -o /dev/stderr -l DEBUG";
         ExecStop = "${pkgs.pve-container}/share/lxc/pve-container-stop-wrapper %i";
         # Environment=BOOTUP=serial
         # Environment=CONSOLETYPE=serial
         # Prevent container init from putting all its output into the journal
-        StandardOutput = null;
+        StandardOutput = "null";
         StandardError = "file:/run/pve/ct-%i.stderr";
       };
     };
@@ -151,20 +151,20 @@ lib.mkIf config.services.proxmox-ve.enable {
       after = [ "lxc.service" ];
       wants = [ "lxc.service" ];
       unitConfig = {
-        DefaultDependencies = false;
+        DefaultDependencies = "no";
         Documentation = "man:lxc-start man:lxc man:pct";
       };
       serviceConfig = {
         Type = "simple";
-        Delegate = true;
+        Delegate = "yes";
         KillMode = "mixed";
-        TimeoutStopSec = 120;
+        TimeoutStopSec = "120s";
         ExecStart = "${pkgs.lxc}/bin/lxc-start -F -n %i";
         ExecStop = "${pkgs.pve-container}/share/lxc/pve-container-stop-wrapper %i";
         # Environment=BOOTUP=serial
         # Environment=CONSOLETYPE=serial
         # Prevent container init from putting all its output into the journal
-        StandardOutput = null;
+        StandardOutput = "null";
         StandardError = "file:/run/pve/ct-%i.stderr";
       };
     };
