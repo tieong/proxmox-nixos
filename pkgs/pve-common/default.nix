@@ -141,11 +141,12 @@ perl538.pkgs.toPerlModule (
     postFixup = ''
       find $out/lib -type f | xargs sed -i \
         -e "/ENV{'PATH'}/d" \
-        -e "s|/sbin/ip|${iproute2}/bin/ip|" \
-        -e "s|/sbin/bridge|${iproute2}/bin/bridge|" \
         -e "s|/usr/share/zoneinfo|${tzdata}/share/zoneinfo|" \
         -Ee "s|(/usr)?/s?bin/||"
     '';
+
+        #     -e "s|/sbin/ip|${iproute2}/bin/ip|" \
+        # -e "s|/sbin/bridge|${iproute2}/bin/bridge|" \
 
     passthru.updateScript = [
       ../update.py
