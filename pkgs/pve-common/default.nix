@@ -142,11 +142,11 @@ perl538.pkgs.toPerlModule (
       find $out/lib -type f | xargs sed -i \
         -e "/ENV{'PATH'}/d" \
         -e "s|/usr/share/zoneinfo|${tzdata}/share/zoneinfo|" \
-        -Ee "s|(/usr)?/s?bin/||"
+        -Ee "s|(/usr)?/s?bin/||" \
+        -e "s|'ip'|${iproute2}/bin/ip|" \
+        -e "s|'bridge'|${iproute2}/bin/bridge|"
     '';
 
-        #     -e "s|/sbin/ip|${iproute2}/bin/ip|" \
-        # -e "s|/sbin/bridge|${iproute2}/bin/bridge|" \
 
     passthru.updateScript = [
       ../update.py
