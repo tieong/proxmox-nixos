@@ -8,6 +8,7 @@
   openssh,
   pve-common,
   pve-cluster,
+  pve-firewall,
   gnutar,
   xz,
   pve-storage,
