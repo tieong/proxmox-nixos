@@ -116,7 +116,7 @@ perl538.pkgs.toPerlModule (
         -e "s/-T//" \
         -e "1s|$| -I$out/${perl538.libPrefix}/${perl538.version}|"
 
-     sed -i $out/share/lxc/hooks/lxcnetaddbr \
+     sed -i $out/share/lxc/lxcnetaddbr \
         -e "s/-T//" \
         -e "1s|$| -I$out/${perl538.libPrefix}/${perl538.version}|"
     '';
