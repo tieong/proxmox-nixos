@@ -43,6 +43,7 @@ perl538.pkgs.toPerlModule (
     patches = [
       ./fix-dsa-keys.patch
       ./lxc-includes.patch
+      ./fix-lxc-detach.patch
     ];
 
     postPatch = ''
@@ -73,6 +74,10 @@ perl538.pkgs.toPerlModule (
       "SBINDIR=$(out)/.bin"
       "PERLDIR=$(out)/${perl538.libPrefix}/${perl538.version}"
     ];
+
+    # postInstall = ''
+    #   cp -r ${lxc}/share/lxc $out/share/
+    # '';
 
     postFixup = ''
       find $out -type f | xargs sed -i \
