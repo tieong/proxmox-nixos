@@ -20,6 +20,26 @@ lib.mkIf config.services.proxmox-ve.enable {
       };
     };
 
+    lxc-net = {
+      description = "LXC network bridge setup";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "network-online.target"];
+      #before = ["lxc.service"];
+
+      documentation = ["man:lxc"];
+
+      unitConfig = {
+        ConditionVirtualization = "!lxc";
+      };
+
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = "yes";
+        ExecStart = "${pkgs.lxc}/libexec/lxc/lxc-net start";
+        ExecStop = "${pkgs.lxc}/libexec/lxc/lxc-net stop";
+      };
+    };
+
     # lxc = {
     #   description = "LXC Container Initialization and Autoboot Code";
     #   wantedBy = [ "multi-user.target" ];
