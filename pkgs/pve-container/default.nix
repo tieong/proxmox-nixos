@@ -22,6 +22,7 @@ let
     pve-common
     pve-cluster
     pve-storage
+    pve-firewall
   ];
   perlEnv = perl538.withPackages (_: perlDeps);
 in
