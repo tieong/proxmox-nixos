@@ -7,6 +7,20 @@
 
 lib.mkIf config.services.proxmox-ve.enable {
   systemd.services = {
+    lxcfs = {
+      description = "FUSE filesystem for LXC";
+      wantedBy = [ "multi-user.target" ];
+      before = [ "lxc.service" ];
+      restartIfChanged = false;
+      serviceConfig = {
+        ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/lxcfs";
+        ExecStart = "${pkgs.lxcfs}/bin/lxcfs /var/lib/lxcfs";
+        ExecStopPost = "-${pkgs.fuse}/bin/fusermount -u /var/lib/lxcfs";
+        KillMode = "process";
+        Restart = "on-failure";
+      };
+    };
+
     lxc-monitord = {
       description = "LXC Container Monitoring Daemon";
       wantedBy = [ "multi-user.target" ];
