@@ -9,9 +9,9 @@ lib.mkIf config.services.proxmox-ve.enable {
   systemd.slices = {
     "system-pve\\x2dcontainer" = {
       description = "PVE LXC Container Slice";
-      documentation = ["man:lxc"];
+      documentation = ["man:pct"];
 
-      sliceConfig = {
+      unitConfig = {
         DefaultDependencies="no";
       };
     };
