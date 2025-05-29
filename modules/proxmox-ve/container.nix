@@ -6,6 +6,17 @@
 }:
 
 lib.mkIf config.services.proxmox-ve.enable {
+  systemd.slices = {
+    "system-pve\\x2dcontainer" = {
+      description = "PVE LXC Container Slice";
+      documentation = ["man:lxc"];
+
+      sliceConfig = {
+        DefaultDependencies="no";
+      };
+    };
+  };
+
   systemd.services = {
     # lxcfs = {
     #   description = "FUSE filesystem for LXC";
