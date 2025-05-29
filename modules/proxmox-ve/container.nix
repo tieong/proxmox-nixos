@@ -12,7 +12,7 @@ lib.mkIf config.services.proxmox-ve.enable {
       wantedBy = [ "multi-user.target" ];
       after = [ "syslog.service" "network.target"];
 
-      documentation = ["man:lxc"]
+      documentation = ["man:lxc"];
 
       serviceConfig = {
         Type = "simple";
