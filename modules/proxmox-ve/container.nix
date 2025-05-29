@@ -24,7 +24,7 @@ lib.mkIf config.services.proxmox-ve.enable {
       description = "LXC network bridge setup";
       wantedBy = [ "multi-user.target" ];
       after = [ "network-online.target"];
-      #before = ["lxc.service"];
+      before = ["lxc.service"];
 
       documentation = ["man:lxc"];
 
@@ -47,12 +47,49 @@ lib.mkIf config.services.proxmox-ve.enable {
       ];
     };
 
-    # lxc = {
-    #   description = "LXC Container Initialization and Autoboot Code";
-    #   wantedBy = [ "multi-user.target" ];
-    #   after = [ "network.target" "lxc-net.service" "remote-fs.target" ];
-    #   wants = [ "lxc-net.service" ];
-    # };
+    lxc = {
+      description = "LXC Container Initialization and Autoboot Code";
+      after = [ "network.target" "lxc-net.service" "remote-fs.target" ];
+      wants = [ "lxc-net.service" ];
+      documentation = ["man:lxc-autostart" "man:lxc"];
+
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = "yes";
+
+        #ExecStartPre = "${pkgs.lxc}/libexec/lxc/lxc-apparmor-load";
+        ExecStart = "${pkgs.lxc}/libexec/lxc/lxc-containers start";
+        ExecStop = "${pkgs.lxc}/libexec/lxc/lxc-containers stop";
+        #ExecReload = "${pkgs.lxc}/libexec/lxc/lxc-apparmor-load";
+        # Environment=BOOTUP=serial
+        # Environment=CONSOLETYPE=serial
+        Delegate = "yes";
+      };
+
+      wantedBy = [ "multi-user.target" ];
+    };
+
+    "lxc@" = {
+      description = "LXC Container: %i";
+      after = [ "lxc.service" ];
+      wants = [ "lxc.service" ];
+
+      documentation = ["man:lxc-start" "man:lxc"];
+
+      serviceConfig = {
+        Type = "simple";
+        KillMode = "mixed";
+        TimeStopSec = "120s";
+
+        ExecStart = "${pkgs.lxc}/bin/lxc-start -F -n %i";
+        ExecStop = "${pkgs.lxc}/bin/lxc-stop -n %i";
+        # Environment=BOOTUP=serial
+        # Environment=CONSOLETYPE=serial
+        Delegate = "yes";
+      };
+
+      wantedBy = [ "multi-user.target" ];
+    };
 
     # pve-lxc-syscalld = {
     #   description = "Proxmox VE LXC Syscall Daemon";
