@@ -89,6 +89,11 @@ perl538.pkgs.toPerlModule (
         -e "s|mkfs.ext4|${e2fsprogs}/bin/mkfs.ext4|" \
         -e "s|lxc-start --version|${lxc}/bin/lxc-start --version|" \
         -e "s|/sbin/ip|${iproute2}/bin/ip|" \
+        -e "s|lxc-console|${lxc}/bin/lxc-console|" \
+        -e "s|lxc-device|${lxc}/bin/lxc-device|" \
+        -e "s|lxc-attach|${lxc}/bin/lxc-attach|" \
+        -e "s|lxc-stop|${lxc}/bin/lxc-stop|" \
+        -e "s|lxc-info|${lxc}/bin/lxc-info|" \
         -e "s|/usr/bin/vncterm||" \
         -e "s|/usr/bin/termproxy||" \
         -e "s|/usr/bin/lxc|${lxc}/bin/lxc|" \
