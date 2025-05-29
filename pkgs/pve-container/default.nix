@@ -93,12 +93,13 @@ perl538.pkgs.toPerlModule (
         -e "s|lxc-start --version|${lxc}/bin/lxc-start --version|" \
         -e "s|/sbin/ip|${iproute2}/bin/ip|" \
         -e "s|'umount'|'${util-linux}/bin/umount'|" \
+        -e "s|'/bin/umount'|'${util-linux}/bin/umount'|" \
         -e "s|lxc-console|${lxc}/bin/lxc-console|" \
         -e "s|lxc-device|${lxc}/bin/lxc-device|" \
         -e "s|lxc-attach|${lxc}/bin/lxc-attach|" \
         -e "s|lxc-stop|${lxc}/bin/lxc-stop|" \
         -e "s|lxc-info|${lxc}/bin/lxc-info|" \
-        -e "s|'losetup'|${util-linux}/bin/losetup|" \
+        -e "s|'losetup'|'${util-linux}/bin/losetup'|" \
         -e "s|/usr/bin/vncterm|${vncterm}/bin/vncterm|" \
         -e "s|/usr/bin/termproxy|${termproxy}/bin/termproxy|" \
         -e "s|/usr/bin/lxc|${lxc}/bin/lxc|" \
