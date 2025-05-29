@@ -86,7 +86,7 @@ perl538.pkgs.toPerlModule (
         -e "s|/usr/bin/dtach|${dtach}/bin/dtach|" \
         -e "s|/usr/bin/ssh|${openssh}/bin/ssh|" \
         -e "s|mkfs.ext4|${e2fsprogs}/bin/mkfs.ext4|" \
-        -e "s|[qw(lxc-start --version)]|[qw(${lxc}/bin/lxc-start --version)]|" \
+        -e "s|lxc-start --version|${lxc}/bin/lxc-start --version|" \
         -e "s|/usr/bin/vncterm||" \
         -e "s|/usr/bin/termproxy||" \
         -e "s|/usr/bin/lxc|${lxc}/bin/lxc|" \
