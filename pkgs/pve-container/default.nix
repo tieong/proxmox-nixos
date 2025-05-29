@@ -10,6 +10,7 @@
   pve-cluster,
   pve-firewall,
   gnutar,
+  iproute2
   xz,
   pve-storage,
   pve-guest-common,
@@ -87,6 +88,7 @@ perl538.pkgs.toPerlModule (
         -e "s|/usr/bin/ssh|${openssh}/bin/ssh|" \
         -e "s|mkfs.ext4|${e2fsprogs}/bin/mkfs.ext4|" \
         -e "s|lxc-start --version|${lxc}/bin/lxc-start --version|" \
+        -e "s|/sbin/ip|${iproute2}/bin/ip|" \
         -e "s|/usr/bin/vncterm||" \
         -e "s|/usr/bin/termproxy||" \
         -e "s|/usr/bin/lxc|${lxc}/bin/lxc|" \
