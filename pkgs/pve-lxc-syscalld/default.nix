@@ -3,7 +3,7 @@
   fetchgit,
   pkg-config,
   craneLib,
-  clang,
+  systemdLibs
 }:
 
 let
@@ -40,6 +40,20 @@ craneLib.buildPackage {
       else
         drv;
   };
+
+  # nativeBuildInputs = [
+  #   pkg-config
+  #   apt
+  #   sg3_utils
+  #   libxcrypt
+  #   acl
+  #   linux-pam
+  # ];
+
+  buildInputs = [
+    systemdLibs
+  ];
+
 
   meta = with lib; {
     description = "";
