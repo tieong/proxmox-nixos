@@ -16,9 +16,9 @@ rustPlatform.buildRustPackage rec {
 
   cargoLock = {
     lockFile = ./Cargo.lock;
-    outputHashes = {
-      "pathpatterns-0.1.2" = lib.fakeSha256;
-    };
+    # outputHashes = {
+    #   "pathpatterns-0.1.2" = lib.fakeSha256;
+    # };
   };
   
   postPatch = ''
