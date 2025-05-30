@@ -1,0 +1,25 @@
+From a10be2efe222aff9e0247d02a1f92034f0ea8f5a Mon Sep 17 00:00:00 2001
+From: Thomas Ieong <th.ieong@free.fr>
+Date: Fri, 30 May 2025 16:50:09 +0200
+Subject: [PATCH] show error
+
+---
+ src/PVE/Network.pm | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/PVE/Network.pm b/src/PVE/Network.pm
+index a004c04..fcc7060 100644
+--- a/PVE/Network.pm
++++ b/PVE/Network.pm
+@@ -201,7 +201,7 @@ sub iface_create :prototype($$@) {
+ 
+ sub iface_set :prototype($@) {
+     my ($iface, @opts) = @_;
+-    run_command(['/sbin/ip', 'link', 'set', $iface, @opts], noerr => 1)
++    run_command(['/sbin/ip', 'link', 'set', $iface, @opts])
+ 	== 0 or die "failed to set interface options for '$iface' (".join(' ', @opts).")\n";
+     return;
+ }
+-- 
+2.49.0
+
