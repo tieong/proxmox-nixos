@@ -99,7 +99,7 @@ perl538.pkgs.toPerlModule (
         -e "s|'/bin/umount'|'${util-linux}/bin/umount'|" \
         -e "s|@lxcfspath@|${lxcfs}|" \
         -e "s|@lxcpath@|${lxc}|" \
-        -e "s|$LXC_CONFIG_PATH/common.seccomp|${lxc}/share/lxc/config/common.seccomp|" \
+        -e "s|"$LXC_CONFIG_PATH/common.seccomp"|"${lxc}/share/lxc/config/common.seccomp"|" \
         -e "s|$cfgpath/userns.conf|$cfgpath/userns.conf.d/01-pve.conf|" \
         -e "s|lxc-console|${lxc}/bin/lxc-console|" \
         -e "s|lxc-device|${lxc}/bin/lxc-device|" \
