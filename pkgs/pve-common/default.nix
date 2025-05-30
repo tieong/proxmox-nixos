@@ -99,7 +99,7 @@ perl538.pkgs.toPerlModule (
         bashpath = "${bash}/bin/";
       })
 
-      ./errors-clear.patch
+#      ./errors-clear.patch
       ./net.patch
     ];
 
