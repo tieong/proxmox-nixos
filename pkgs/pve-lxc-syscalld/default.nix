@@ -41,9 +41,6 @@ craneLib.buildPackage {
         drv;
   };
 
-
-  LIBCLANG_PATH = "${libclang.lib}/lib";
-
   meta = with lib; {
     description = "";
     homepage = "git://git.proxmox.com/?p=proxmox.git";
