@@ -1,10 +1,14 @@
 {
   lib,
-  rustPlatform,
   fetchgit,
+  pkg-config,
+  clang,
 }:
 
-rustPlatform.buildRustPackage rec {
+let
+  isProxmoxRS = p: lib.hasPrefix "git+https://github.com/proxmox/proxmox-rs.git" p.source;
+in
+craneLib.buildPackage {
   pname = "pve-lxc-syscalld";
   version = "1.3.0";
 
@@ -13,36 +17,39 @@ rustPlatform.buildRustPackage rec {
     rev = "1a98063bd9a3876cc699bb22fa8c1a1bda02ef3d";
     hash = "sha256-SEFeeJgK0Qw7st9eK1k8g3gJkQ+li5Ucfdj1GWIjj1c=";
   };
-
-  cargoLock = {
-    lockFile = ./Cargo.lock;
-    allowBuiltinFetchGit = true;
-  };
   
-  prePatch = ''
-    cp ${./Cargo.toml} Cargo.toml
+  postPatch = ''
+    rm -rf .cargo
     cp ${./Cargo.lock} Cargo.lock
+    cp ${./Cargo.toml} Cargo.toml
   '';
 
-  passthru.updateScript = [
-    ../update.py
-    pname
-    "--url"
-    src.url
-    "--prefix"
-    "pve-lxc-syscalld: bump version to"
-    "--root"
-    pname
-  ];
+  REPOID = "lol";
+
+  cargoVendorDir = craneLib.vendorCargoDeps {
+    cargoLock = ./Cargo.lock;
+    overrideVendorGitCheckout =
+      ps: drv:
+      if (lib.any isProxmoxRS ps) then
+        (drv.overrideAttrs (_old: {
+          postPatch = ''
+            rm .cargo/config 
+          '';
+        }))
+      else
+        drv;
+  };
+
+
+  LIBCLANG_PATH = "${libclang.lib}/lib";
 
   meta = with lib; {
-    description = "PVE LXC Syscalld";
-    homepage = "git://git.proxmox.com/?p=pve-lxc-syscalld.git";
-    license = with licenses; [ ];
+    description = "";
+    homepage = "git://git.proxmox.com/?p=proxmox.git";
     maintainers = with maintainers; [
       camillemndn
       julienmalka
     ];
-    platforms = platforms.linux;
+    mainProgram = "proxmox";
   };
 }
