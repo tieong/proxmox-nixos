@@ -17,7 +17,6 @@ rustPlatform.buildRustPackage rec {
   cargoLock.lockFile = ./Cargo.lock;
 
   postPatch = ''
-    rm .cargo/config
     ln -s ${./Cargo.lock} Cargo.lock
   '';
 
