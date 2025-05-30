@@ -100,6 +100,7 @@ perl538.pkgs.toPerlModule (
       })
 
       ./show-error.patch
+      ./show-more.patch
     ];
 
     propagatedBuildInputs = [
