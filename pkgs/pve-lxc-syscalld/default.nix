@@ -14,14 +14,11 @@ rustPlatform.buildRustPackage rec {
     hash = "sha256-SEFeeJgK0Qw7st9eK1k8g3gJkQ+li5Ucfdj1GWIjj1c=";
   };
 
-  useFetchCargoVendor = true;
-  cargoHash = "sha256-uXwefUV1NAKqwwPIWj4Slkx0c5b+RfLR3caTb42fc4M=";
+  cargoLock.lockFile = ./Cargo.lock;
 
-  #cargoLock.lockFile = ./Cargo.lock;
-
-  # postPatch = ''
-  #   ln -s ${./Cargo.lock} Cargo.lock
-  # '';
+  postPatch = ''
+    ln -s ${./Cargo.lock} Cargo.lock
+  '';
 
   meta = with lib; {
     description = "PVE LXC Syscalld";
