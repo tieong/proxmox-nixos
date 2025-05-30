@@ -53,6 +53,10 @@ stdenv.mkDerivation (finalAttrs: {
     systemd
   ];
 
+  propagatedBuildInputs = [
+    apparmor-parser
+  ];
+
   patches = [
     # fix docbook2man version detection
     ./docbook-hack.patch

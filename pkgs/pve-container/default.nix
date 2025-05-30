@@ -12,6 +12,7 @@
   shadow,
   pve-cluster,
   pve-firewall,
+  apparmor-parser,
   gnutar,
   util-linux,
   iproute2,
@@ -26,6 +27,7 @@
 
 let
   perlDeps = with perl538.pkgs; [
+    apparmor-parser
     pve-guest-common
     pve-common
     pve-cluster
