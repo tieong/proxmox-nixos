@@ -18,7 +18,7 @@ index fcc7060..317e1a9 100644
 -    run_command(['/sbin/ip', 'link', 'set', $iface, @opts])
 -	== 0 or die "failed to set interface options for '$iface' (".join(' ', @opts).")\n";
 +    run_command(['/sbin/ip', 'link', 'set', $iface, @opts]);
-+    print "IFACE IS TESTING $iface" . "".join(' ', @opts)"" .   "\n";
++    print "IFACE IS TESTING $iface" . join(' ', @opts) . "\n";
      return;
  }
  
