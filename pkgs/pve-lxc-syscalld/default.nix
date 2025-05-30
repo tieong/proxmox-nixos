@@ -11,7 +11,7 @@ rustPlatform.buildRustPackage rec {
   src = fetchgit {
     url = "git://git.proxmox.com/git/pve-lxc-syscalld.git";
     rev = "1a98063bd9a3876cc699bb22fa8c1a1bda02ef3d";
-    hash = "";
+    hash = "sha256-9y6Z6IaIHPgbraT7NGUUsEB/PMWybgRt876sUGHUGjg=";
   };
 
   cargoLock.lockFile = ./Cargo.lock;
@@ -22,7 +22,7 @@ rustPlatform.buildRustPackage rec {
   '';
 
   meta = with lib; {
-    description = "Alternative to Perl XS for Rust";
+    description = "PVE LXC Syscalld";
     homepage = "git://git.proxmox.com/?p=pve-lxc-syscalld.git";
     license = with licenses; [ ];
     maintainers = with maintainers; [
