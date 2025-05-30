@@ -6,7 +6,7 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "pve-lxc-syscalld";
-  version = "2024-05-13";
+  version = "1.3.0";
 
   src = fetchgit {
     url = "git://git.proxmox.com/git/pve-lxc-syscalld.git";
