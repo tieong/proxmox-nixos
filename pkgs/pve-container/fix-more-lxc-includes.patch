@@ -9,8 +9,8 @@ Subject: [PATCH] Include lxcfs, lxc common.conf and common.seccomp
 
 diff --git a/src/PVE/LXC.pm b/src/PVE/LXC.pm
 index c333230..8d8c855 100644
---- a/src/PVE/LXC.pm
-+++ b/src/PVE/LXC.pm
+--- a/PVE/LXC.pm
++++ b/PVE/LXC.pm
 @@ -672,6 +672,13 @@ sub update_lxc_config {
      my $inc = "$cfgpath/$ostype.common.conf";
      $inc ="$cfgpath/common.conf.d/01-pve.conf" if !-f $inc;
