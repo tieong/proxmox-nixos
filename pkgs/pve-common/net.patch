@@ -11,15 +11,6 @@ diff --git a/src/PVE/Network.pm b/src/PVE/Network.pm
 index 317e1a9..36e3fbb 100644
 --- a/PVE/Network.pm
 +++ b/PVE/Network.pm
-@@ -202,7 +202,7 @@ sub iface_create :prototype($$@) {
- sub iface_set :prototype($@) {
-     my ($iface, @opts) = @_;
-     run_command(['/sbin/ip', 'link', 'set', $iface, @opts]);
--    print "IFACE IS TESTING $iface" . "".join(' ', @opts)"" .   "\n";
-+    print "IFACE IS TESTING $iface" . join(' ', @opts) .   "\n";
-     return;
- }
- 
 @@ -210,7 +210,9 @@ sub iface_set :prototype($@) {
  sub iface_set_master :prototype($$) {
      my ($iface, $master) = @_;
