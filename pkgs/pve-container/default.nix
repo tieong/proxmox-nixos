@@ -107,6 +107,7 @@ perl538.pkgs.toPerlModule (
         -e "s|'objdump'|'${binutils}/bin/objdump'|" \
         -e "s|'newgidmap'|'${shadow}/bin/newgidmap'|" \
         -e "s|'newuidmap'|'${shadow}/bin/newuidmap'|" \
+        -e "s|'nsenter'|'${util-linux}/bin/nsenter'|" \
         -e "s|/usr/bin/lxc|${lxc}/bin/lxc|" \
         -e "s|/usr/share/lxc|$out/share/lxc|" \
         -e "s|/usr/share/zoneinfo|${tzdata}/share/zoneinfo|"
