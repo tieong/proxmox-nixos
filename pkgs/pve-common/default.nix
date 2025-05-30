@@ -98,8 +98,6 @@ perl538.pkgs.toPerlModule (
         src = ./0004-fix-Don-t-hardcode-bin-bash.patch;
         bashpath = "${bash}/bin/";
       })
-
-      ./0005-debug.patch
     ];
 
     propagatedBuildInputs = [
