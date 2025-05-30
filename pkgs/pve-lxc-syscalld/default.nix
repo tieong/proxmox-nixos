@@ -20,8 +20,6 @@ rustPlatform.buildRustPackage rec {
   };
   
   postPatch = ''
-    rm .cargo/config
-    cd termproxy
     cp ${./Cargo.toml} Cargo.toml
     cp ${./Cargo.lock} Cargo.lock
   '';
