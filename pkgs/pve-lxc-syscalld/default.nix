@@ -11,7 +11,7 @@ rustPlatform.buildRustPackage rec {
   src = fetchgit {
     url = "git://git.proxmox.com/git/pve-lxc-syscalld.git";
     rev = "1a98063bd9a3876cc699bb22fa8c1a1bda02ef3d";
-    hash = "sha256-9y6Z6IaIHPgbraT7NGUUsEB/PMWybgRt876sUGHUGjg=";
+    hash = "sha256-SEFeeJgK0Qw7st9eK1k8g3gJkQ+li5Ucfdj1GWIjj1c=";
   };
 
   cargoLock.lockFile = ./Cargo.lock;
