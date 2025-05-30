@@ -20,6 +20,13 @@ rustPlatform.buildRustPackage rec {
     ln -s ${./Cargo.lock} Cargo.lock
   '';
 
+  cargoLock = {
+    lockFile = ./Cargo.lock;
+    outputHashes = {
+      "finalfusion-0.14.0" = "17f4bsdzpcshwh74w5z119xjy2if6l2wgyjy56v621skr2r8y904";
+    };
+  };
+
   meta = with lib; {
     description = "PVE LXC Syscalld";
     homepage = "git://git.proxmox.com/?p=pve-lxc-syscalld.git";
