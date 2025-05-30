@@ -26,8 +26,6 @@
 
 let
   perlDeps = with perl538.pkgs; [
-    TermReadKey
-    TermReadLineGnu
     pve-guest-common
     pve-common
     pve-cluster
