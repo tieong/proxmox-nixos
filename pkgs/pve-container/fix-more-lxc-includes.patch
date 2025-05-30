@@ -11,7 +11,7 @@ diff --git a/src/PVE/LXC.pm b/src/PVE/LXC.pm
 index c333230..8d8c855 100644
 --- a/PVE/LXC.pm
 +++ b/PVE/LXC.pm
-@@ -672,6 +672,13 @@ sub update_lxc_config {
+@@ -672,3 +672,7 @@ sub update_lxc_config {
      my $inc = "$cfgpath/$ostype.common.conf";
      $inc ="$cfgpath/common.conf.d/01-pve.conf" if !-f $inc;
      $raw .= "lxc.include = $inc\n";
@@ -19,9 +19,7 @@ index c333230..8d8c855 100644
 +    $raw .= "lxc.include = @lxcfspath@/share/lxc/config/common.conf.d/00-lxcfs.conf\n";
 +    # Include common.conf
 +    $raw .= "lxc.include = @lxcpath@/share/lxc/config/common.conf\n";
-+    # Include common.seccomp
-+    $raw .= "lxc.include = @lxcpath@/share/lxc/config/common.seccomp\n";
-+
+
      if ($unprivileged) {
  	$inc = "$cfgpath/$ostype.userns.conf";
  	$inc = "$cfgpath/userns.conf" if !-f $inc;
