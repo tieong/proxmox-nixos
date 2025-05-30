@@ -19,7 +19,8 @@ rustPlatform.buildRustPackage rec {
     allowBuiltinFetchGit = true;
   };
   
-  postPatch = ''
+  prePatch = ''
+    rm .cargo/config
     cp ${./Cargo.toml} Cargo.toml
     cp ${./Cargo.lock} Cargo.lock
   '';
