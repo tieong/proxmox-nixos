@@ -101,7 +101,7 @@ perl538.pkgs.toPerlModule (
         -e "s|lxc-attach|${lxc}/bin/lxc-attach|" \
         -e "s|lxc-stop|${lxc}/bin/lxc-stop|" \
         -e "s|lxc-info|${lxc}/bin/lxc-info|" \
-        -e "s|'lxc-usernsexec'|${lxc}/bin/lxc-usernsexec|" \
+        -e "s|'lxc-usernsexec'|'${lxc}/bin/lxc-usernsexec'|" \
         -e "s|'losetup'|'${util-linux}/bin/losetup'|" \
         -e "s|/usr/bin/vncterm|${vncterm}/bin/vncterm|" \
         -e "s|/usr/bin/termproxy|${termproxy}/bin/termproxy|" \
