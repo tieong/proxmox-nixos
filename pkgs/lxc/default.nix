@@ -70,7 +70,8 @@ stdenv.mkDerivation (finalAttrs: {
 
     postPatch = ''
       sed -i src/lxc/lsm/apparmor.c \
-        -e "s|@apparmor_parser@|${apparmor-parser}/bin/apparmor_parser|"
+        -e "s|@apparmor_parser@|${apparmor-parser}/bin/apparmor_parser|" \
+        -e "s|/usr/bin/lxc-start|{${placeholder "out"}/bin/lxc-start|"
     '';
 
   mesonFlags = [
