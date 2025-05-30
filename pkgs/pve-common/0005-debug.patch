@@ -15,9 +15,9 @@ index a004c04..4496638 100644
  
  sub iface_set :prototype($@) {
      my ($iface, @opts) = @_;
-+    print "TEST " . "$iface" . " " . "$master " . "\n";
++    print "TEST " . "$iface" . " " . "\n";
 +    print join(", ", @opts);
-+    sleep 300;
++    sleep 120;
      run_command(['/sbin/ip', 'link', 'set', $iface, @opts], noerr => 1)
  	== 0 or die "failed to set interface options for '$iface' (".join(' ', @opts).")\n";
      return;
