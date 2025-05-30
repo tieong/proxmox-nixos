@@ -7,6 +7,8 @@
   lxc,
   openssh,
   pve-common,
+  binutils,
+  shadow,
   pve-cluster,
   pve-firewall,
   gnutar,
@@ -102,6 +104,9 @@ perl538.pkgs.toPerlModule (
         -e "s|'losetup'|'${util-linux}/bin/losetup'|" \
         -e "s|/usr/bin/vncterm|${vncterm}/bin/vncterm|" \
         -e "s|/usr/bin/termproxy|${termproxy}/bin/termproxy|" \
+        -e "s|'objdump'|'${binutils}/bin/objdump'|" \
+        -e "s|'newgidmap'|'${shadow}/bin/newgidmap'|" \
+        -e "s|'newuidmap'|'${shadow}/bin/newuidmap'|" \
         -e "s|/usr/bin/lxc|${lxc}/bin/lxc|" \
         -e "s|/usr/share/lxc|$out/share/lxc|" \
         -e "s|/usr/share/zoneinfo|${tzdata}/share/zoneinfo|"
