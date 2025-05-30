@@ -1,17 +1,26 @@
-From 32b419bed49737665cc5fa9e1606665e30844079 Mon Sep 17 00:00:00 2001
+From 87c2bc82cbd031efa3016e1ae4e4154b75cbc8f3 Mon Sep 17 00:00:00 2001
 From: Thomas Ieong <th.ieong@free.fr>
-Date: Fri, 30 May 2025 15:55:12 +0200
-Subject: [PATCH] include lxc,lxcfs
+Date: Fri, 30 May 2025 16:20:30 +0200
+Subject: [PATCH] unconfined
 
 ---
- src/PVE/LXC.pm | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ src/PVE/LXC.pm | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
 diff --git a/src/PVE/LXC.pm b/src/PVE/LXC.pm
-index 2b9f0cf..15d9935 100644
+index 2b9f0cf..356ecfb 100644
 --- a/PVE/LXC.pm
 +++ b/PVE/LXC.pm
-@@ -670,8 +670,14 @@ sub update_lxc_config {
+@@ -580,7 +580,7 @@ sub make_apparmor_config {
+     # user-configured profile has precedence, but first we go through our own
+     # code to figure out whether we should warn the user:
+ 
+-    my $raw = "lxc.apparmor.profile = generated\n";
++    my $raw = "lxc.apparmor.profile = unconfined\n";
+     my @profile_uses;
+ 
+     if ($features->{fuse}) {
+@@ -670,8 +670,13 @@ sub update_lxc_config {
  
      my $cfgpath = '/usr/share/lxc/config';
      my $inc = "$cfgpath/$ostype.common.conf";
@@ -22,7 +31,6 @@ index 2b9f0cf..15d9935 100644
 +    $raw .= "lxc.include = @lxcfspath@/share/lxc/config/common.conf.d/00-lxcfs.conf\n";
 +    # Include common.conf
 +    $raw .= "lxc.include = @lxcpath@/share/lxc/config/common.conf\n";
-+    $raw .= "lxc.apparmor.profile = unconfined\n";
 +
      if ($unprivileged) {
  	$inc = "$cfgpath/$ostype.userns.conf";
