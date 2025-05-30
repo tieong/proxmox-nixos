@@ -1,0 +1,25 @@
+From 7ac2da279e9efe05c941003dc4ec63ab242d87ec Mon Sep 17 00:00:00 2001
+From: Thomas Ieong <th.ieong@free.fr>
+Date: Sat, 31 May 2025 00:32:31 +0200
+Subject: [PATCH] template
+
+---
+ src/lxc/lsm/apparmor.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/lxc/lsm/apparmor.c b/src/lxc/lsm/apparmor.c
+index d6516ae9f..7797e2f17 100644
+--- a/lxc/lsm/apparmor.c
++++ b/lxc/lsm/apparmor.c
+@@ -561,7 +561,7 @@ static bool check_apparmor_parser_version(struct lsm_ops *ops)
+ 		return true;
+ 	}
+ 
+-	parserpipe = lxc_popen("apparmor_parser --version");
++	parserpipe = lxc_popen("@apparmor_parser@ --version");
+ 	if (!parserpipe) {
+ 		fprintf(stderr, "Failed to run check for apparmor_parser\n");
+ 		goto out;
+-- 
+2.49.0
+

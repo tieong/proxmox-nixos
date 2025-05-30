@@ -64,7 +64,14 @@ stdenv.mkDerivation (finalAttrs: {
     # Fix hardcoded path of lxc-user-nic
     # This is needed to use unprivileged containers
     ./user-nic.diff
+
+    ./0001-template.patch
   ];
+
+    postPatch = ''
+      sed -i lxc/lsm/apparmor.c \
+        -e "s|@apparmor_parser@|${pkgs.apparmor-parser}/bin/apparmor_parser|"
+    '';
 
   mesonFlags = [
     "-Dinstall-init-files=true"
