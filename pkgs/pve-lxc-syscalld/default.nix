@@ -1,27 +1,12 @@
 {
   lib,
+  rustPlatform,
   fetchgit,
-  pkg-config,
-  openssl,
-  zstd,
-  clang,
-  libclang,
-  libuuid,
-  systemdLibs,
-  craneLib,
-  apt,
-  sg3_utils,
-  libxcrypt,
-  acl,
-  linux-pam,
 }:
 
-let
-  isProxmoxRS = p: lib.hasPrefix "git+https://github.com/proxmox/proxmox-rs.git" p.source;
-in
-craneLib.buildPackage {
+rustPlatform.buildRustPackage rec {
   pname = "pve-lxc-syscalld";
-  version = "2024-06-13";
+  version = "2024-05-13";
 
   src = fetchgit {
     url = "git://git.proxmox.com/git/pve-lxc-syscalld.git";
@@ -29,60 +14,21 @@ craneLib.buildPackage {
     hash = "";
   };
 
+  cargoLock.lockFile = ./Cargo.lock;
+
   postPatch = ''
-    rm -rf .cargo
-    cp ${./Cargo.lock} Cargo.lock
-    cp ${./Cargo.toml} Cargo.toml
+    rm .cargo/config
+    ln -s ${./Cargo.lock} Cargo.lock
   '';
 
-  REPOID = "lol";
-
-  cargoVendorDir = craneLib.vendorCargoDeps {
-    cargoLock = ./Cargo.lock;
-    overrideVendorGitCheckout =
-      ps: drv:
-      if (lib.any isProxmoxRS ps) then
-        (drv.overrideAttrs (_old: {
-          postPatch = ''
-            rm .cargo/config 
-          '';
-        }))
-      else
-        drv;
-  };
-
-  nativeBuildInputs = [
-    pkg-config
-    clang
-    zstd
-    zstd.dev
-    apt
-    sg3_utils
-    libxcrypt
-    acl
-    linux-pam
-  ];
-
-  buildInputs = [
-    openssl
-    zstd
-    clang
-    zstd.dev
-    libuuid
-    systemdLibs
-  ];
-
-  # LIBCLANG_PATH = "${libclang.lib}/lib";
-
-  # cargoTestExtraArgs = "-- --skip=test_get_current_release_codename rrd::tests::load_and_save_rrd_v2 rrd::tests::upgrade_from_rrd_v1";
-
   meta = with lib; {
-    description = "";
-    homepage = "git://git.proxmox.com/?p=proxmox.git";
+    description = "Alternative to Perl XS for Rust";
+    homepage = "git://git.proxmox.com/?p=pve-lxc-syscalld.git";
+    license = with licenses; [ ];
     maintainers = with maintainers; [
       camillemndn
       julienmalka
     ];
-    mainProgram = "proxmox";
+    platforms = platforms.linux;
   };
 }
