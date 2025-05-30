@@ -17,14 +17,25 @@ rustPlatform.buildRustPackage rec {
   cargoLock = {
     lockFile = ./Cargo.lock;
     allowBuiltinFetchGit = true;
-    # outputHashes = {
-    #   "pathpatterns-0.1.2" = lib.fakeSha256;
-    # };
   };
   
   postPatch = ''
-    ln -s ${./Cargo.lock} Cargo.lock
+    rm .cargo/config
+    cd termproxy
+    cp ${./Cargo.toml} Cargo.toml
+    cp ${./Cargo.lock} Cargo.lock
   '';
+
+  passthru.updateScript = [
+    ../update.py
+    pname
+    "--url"
+    src.url
+    "--prefix"
+    "pve-lxc-syscalld: bump version to"
+    "--root"
+    pname
+  ];
 
   meta = with lib; {
     description = "PVE LXC Syscalld";
