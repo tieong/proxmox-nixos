@@ -9,8 +9,8 @@ Subject: [PATCH] template
 
 diff --git a/src/lxc/lsm/apparmor.c b/src/lxc/lsm/apparmor.c
 index d6516ae9f..7797e2f17 100644
---- a/lxc/lsm/apparmor.c
-+++ b/lxc/lsm/apparmor.c
+--- a/src/lxc/lsm/apparmor.c
++++ b/src/lxc/lsm/apparmor.c
 @@ -561,7 +561,7 @@ static bool check_apparmor_parser_version(struct lsm_ops *ops)
  		return true;
  	}

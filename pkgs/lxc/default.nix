@@ -69,7 +69,7 @@ stdenv.mkDerivation (finalAttrs: {
   ];
 
     postPatch = ''
-      sed -i lxc/lsm/apparmor.c \
+      sed -i src/lxc/lsm/apparmor.c \
         -e "s|@apparmor_parser@|${apparmor-parser}/bin/apparmor_parser|"
     '';
 
