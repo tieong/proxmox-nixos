@@ -2,6 +2,7 @@
   lib,
   fetchgit,
   pkg-config,
+  craneLib,
   clang,
 }:
 
