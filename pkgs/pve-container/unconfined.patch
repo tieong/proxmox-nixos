@@ -11,15 +11,6 @@ diff --git a/src/PVE/LXC.pm b/src/PVE/LXC.pm
 index 2b9f0cf..356ecfb 100644
 --- a/PVE/LXC.pm
 +++ b/PVE/LXC.pm
-@@ -580,7 +580,7 @@ sub make_apparmor_config {
-     # user-configured profile has precedence, but first we go through our own
-     # code to figure out whether we should warn the user:
- 
--    my $raw = "lxc.apparmor.profile = generated\n";
-+    my $raw = "lxc.apparmor.profile = unconfined\n";
-     my @profile_uses;
- 
-     if ($features->{fuse}) {
 @@ -670,8 +670,13 @@ sub update_lxc_config {
  
      my $cfgpath = '/usr/share/lxc/config';
