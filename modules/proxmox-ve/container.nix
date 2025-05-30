@@ -18,20 +18,6 @@ lib.mkIf config.services.proxmox-ve.enable {
   };
 
   systemd.services = {
-    # lxcfs = {
-    #   description = "FUSE filesystem for LXC";
-    #   wantedBy = [ "multi-user.target" ];
-    #   before = [ "lxc.service" ];
-    #   restartIfChanged = false;
-    #   serviceConfig = {
-    #     ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/lxcfs";
-    #     ExecStart = "${pkgs.lxcfs}/bin/lxcfs /var/lib/lxcfs";
-    #     ExecStopPost = "-${pkgs.fuse}/bin/fusermount -u /var/lib/lxcfs";
-    #     KillMode = "process";
-    #     Restart = "on-failure";
-    #   };
-    # };
-
     lxc-monitord = {
       description = "LXC Container Monitoring Daemon";
       wantedBy = [ "multi-user.target" ];
@@ -94,39 +80,17 @@ lib.mkIf config.services.proxmox-ve.enable {
       wantedBy = [ "multi-user.target" ];
     };
 
-    # "lxc@" = {
-    #   description = "LXC Container: %i";
-    #   after = [ "lxc.service" ];
-    #   wants = [ "lxc.service" ];
-
-    #   documentation = ["man:lxc-start" "man:lxc"];
-
-    #   serviceConfig = {
-    #     Type = "simple";
-    #     KillMode = "mixed";
-    #     TimeStopSec = "120s";
-
-    #     ExecStart = "${pkgs.lxc}/bin/lxc-start -F -n %i";
-    #     ExecStop = "${pkgs.lxc}/bin/lxc-stop -n %i";
-    #     # Environment=BOOTUP=serial
-    #     # Environment=CONSOLETYPE=serial
-    #     Delegate = "yes";
-    #   };
-
-    #   wantedBy = [ "multi-user.target" ];
-    # };
-
-    # pve-lxc-syscalld = {
-    #   description = "Proxmox VE LXC Syscall Daemon";
-    #   wantedBy = [ "multi-user.target" ];
-    #   before = [ "pve-guests.service" ];
-    #   serviceConfig = {
-    #     Type = "notify";
-    #     ExecStart = "/usr/lib/x86_64-linux-gnu/pve-lxc-syscalld/pve-lxc-syscalld --system /run/pve/lxc-syscalld.sock";
-    #     RuntimeDirectory = "pve";
-    #     Restart = "on-failure";
-    #   };
-    # };
+    pve-lxc-syscalld = {
+      description = "Proxmox VE LXC Syscall Daemon";
+      wantedBy = [ "multi-user.target" ];
+      before = [ "pve-guests.service" ];
+      serviceConfig = {
+        Type = "notify";
+        ExecStart = "${pkgs.pve-lxc-syscalld}/bin/pve-lxc-syscalld --system /run/pve/lxc-syscalld.sock";
+        RuntimeDirectory = "pve";
+        Restart = "on-failure";
+      };
+    };
 
     "pve-container-debug@" = {
       # based on lxc@.service, but without an install section because
