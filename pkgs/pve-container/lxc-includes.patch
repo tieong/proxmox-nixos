@@ -11,7 +11,7 @@ diff --git a/src/PVE/LXC.pm b/src/PVE/LXC.pm
 index 2b9f0cf..15d9935 100644
 --- a/PVE/LXC.pm
 +++ b/PVE/LXC.pm
-@@ -670,8 +670,13 @@ sub update_lxc_config {
+@@ -670,8 +670,14 @@ sub update_lxc_config {
  
      my $cfgpath = '/usr/share/lxc/config';
      my $inc = "$cfgpath/$ostype.common.conf";
@@ -22,6 +22,7 @@ index 2b9f0cf..15d9935 100644
 +    $raw .= "lxc.include = @lxcfspath@/share/lxc/config/common.conf.d/00-lxcfs.conf\n";
 +    # Include common.conf
 +    $raw .= "lxc.include = @lxcpath@/share/lxc/config/common.conf\n";
++    $raw .= "lxc.apparmor.profile = unconfined\n";
 +
      if ($unprivileged) {
  	$inc = "$cfgpath/$ostype.userns.conf";
