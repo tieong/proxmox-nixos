@@ -55,7 +55,6 @@ perl538.pkgs.toPerlModule (
       ./fix-dsa-keys.patch
       ./lxc-includes.patch
       ./fix-lxc-detach.patch
-      ./fix-more-lxc-includes.patch
     ];
 
     postPatch = ''
