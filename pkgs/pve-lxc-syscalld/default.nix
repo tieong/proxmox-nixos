@@ -15,7 +15,7 @@ rustPlatform.buildRustPackage rec {
   };
 
   useFetchCargoVendor = true;
-
+  cargoHash = "sha256-uXwefUV1NAKqwwPIWj4Slkx0c5b+RfLR3caTb42fc4M=";
 
   #cargoLock.lockFile = ./Cargo.lock;
 
