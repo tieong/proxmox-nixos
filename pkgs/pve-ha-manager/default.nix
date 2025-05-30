@@ -68,14 +68,14 @@ perl538.pkgs.toPerlModule (
       cp ${pve-qemu-server}/.bin/* $out/bin
       sed -i $out/bin/pct \
         -e "s/-T//" \
-        -e "1s|$| -I$out/${perl538.libPrefix}/${perl538.version}|"
+        -e "1s|$| -I$out/${perl538.libPrefix}/${perl538.version} -d|"
       rm $out/bin/pve-ha-simulator
     '';
 
     postFixup = ''
       for bin in $out/bin/*; do
         wrapProgram $bin \
-          --prefix PATH : ${lib.makeBinPath [ pve-qemu gnutar xz ]} \
+          --prefix PATH : ${lib.makeBinPath [ pve-qemu ]} \
           --prefix PERL5LIB : $out/${perl538.libPrefix}/${perl538.version}
       done      
     '';
