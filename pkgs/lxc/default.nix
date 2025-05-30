@@ -7,6 +7,7 @@
   dbus,
   docbook2x,
   libapparmor,
+  apparmor-parser,
   libcap,
   libseccomp,
   libselinux,
@@ -44,6 +45,7 @@ stdenv.mkDerivation (finalAttrs: {
     bashInteractive
     dbus
     libapparmor
+    apparmor-parser
     libcap
     libseccomp
     libselinux

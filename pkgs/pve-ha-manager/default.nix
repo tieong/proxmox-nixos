@@ -9,8 +9,6 @@
   pve-guest-common,
   pve-qemu-server,
   pve-storage,
-  gnutar,
-  xz,
   pve-qemu,
   enableLinstor ? false,
 }:

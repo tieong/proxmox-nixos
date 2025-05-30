@@ -41,19 +41,9 @@ craneLib.buildPackage {
         drv;
   };
 
-  # nativeBuildInputs = [
-  #   pkg-config
-  #   apt
-  #   sg3_utils
-  #   libxcrypt
-  #   acl
-  #   linux-pam
-  # ];
-
   buildInputs = [
     systemdLibs
   ];
-
 
   meta = with lib; {
     description = "";
