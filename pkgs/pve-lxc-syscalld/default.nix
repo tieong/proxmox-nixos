@@ -16,6 +16,7 @@ rustPlatform.buildRustPackage rec {
 
   cargoLock = {
     lockFile = ./Cargo.lock;
+    allowBuiltinFetchGit = true;
     # outputHashes = {
     #   "pathpatterns-0.1.2" = lib.fakeSha256;
     # };
