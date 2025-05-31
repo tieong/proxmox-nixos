@@ -100,7 +100,7 @@ perl538.pkgs.toPerlModule (
       })
 
 #      ./errors-clear.patch
-      ./net.patch
+      #./net.patch
     ];
 
     propagatedBuildInputs = [
