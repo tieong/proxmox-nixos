@@ -149,8 +149,6 @@ perl538.pkgs.toPerlModule (
         -e "s|'diff'|'${diffutils}/bin/diff'|" \
         -e "s|'ip'|'${iproute2}/bin/ip'|"
     '';
-        #     -e "s|'ip'|'${iproute2}/bin/ip'|" \
-        # -e "s|'bridge'|'${iproute2}/bin/bridge'|"
 
     passthru.updateScript = [
       ../update.py
