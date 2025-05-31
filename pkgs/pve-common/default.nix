@@ -143,7 +143,8 @@ perl538.pkgs.toPerlModule (
         -e "/ENV{'PATH'}/d" \
         -e "s|/usr/share/zoneinfo|${tzdata}/share/zoneinfo|" \
         -Ee "s|(/usr)?/s?bin/||" \
-        -e "s|'diff'|'${diffutils}/bin/diff'|"
+        -e "s|'diff'|'${diffutils}/bin/diff'|" \
+        -e "s|'ip'|'${iproute2}/bin/ip'|"
     '';
 
     passthru.updateScript = [
