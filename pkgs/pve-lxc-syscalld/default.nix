@@ -33,22 +33,21 @@ rustPlatform.buildRustPackage rec {
   
   prePatch = ''
     rm .cargo/config.toml
-    cat ${registry}/cargo-patches.toml >> Cargo.toml
     cp ${./Cargo.lock} Cargo.lock
   '';
 
-  passthru.registry = registry;
+  # passthru.registry = registry;
 
-  passthru.updateScript = [
-    ../update.py
-    pname
-    "--url"
-    src.url
-    "--prefix"
-    "pve-lxc-syscalld: bump version to"
-    "--root"
-    pname
-  ];
+  # passthru.updateScript = [
+  #   ../update.py
+  #   pname
+  #   "--url"
+  #   src.url
+  #   "--prefix"
+  #   "pve-lxc-syscalld: bump version to"
+  #   "--root"
+  #   pname
+  # ];
 
   # REPOID = "lol";
 
@@ -67,7 +66,6 @@ rustPlatform.buildRustPackage rec {
   # };
 
   buildInputs = [
-    registry
     systemdLibs
   ];
 
