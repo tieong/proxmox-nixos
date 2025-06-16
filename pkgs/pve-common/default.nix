@@ -92,10 +92,10 @@ perl538.pkgs.toPerlModule (
         pciutils = "${pciutils}";
       })
 
-      (substituteAll {
-        src = ./0004-fix-Don-t-hardcode-bin-bash.patch;
-        bashpath = "${bash}/bin/";
-      })
+      # (substituteAll {
+      #   src = ./0004-fix-Don-t-hardcode-bin-bash.patch;
+      #   bashpath = "${bash}/bin/";
+      # })
     ];
 
     propagatedBuildInputs = [
