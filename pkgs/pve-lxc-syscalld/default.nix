@@ -33,7 +33,6 @@ rustPlatform.buildRustPackage rec {
   
   prePatch = ''
     rm .cargo/config.toml
-    cd termproxy
     cat ${registry}/cargo-patches.toml >> Cargo.toml
     cp ${./Cargo.lock} Cargo.lock
   '';
