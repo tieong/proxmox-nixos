@@ -35,6 +35,7 @@ let
 
     proxmox-acme = callPackage ./proxmox-acme { };
     proxmox-backup-qemu = callPackage ./proxmox-backup-qemu { };
+    proxmox-i18n = callPackage ./proxmox-i18n { };
     proxmox-ve = callPackage ./proxmox-ve { };
     proxmox-widget-toolkit = callPackage ./proxmox-widget-toolkit { };
 
@@ -63,7 +64,7 @@ let
     linstor-client = callPackage ./linstor-client { };
     linstor-proxmox = callPackage ./linstor-proxmox { };
     linstor-server = pkgs-unstable.callPackage ./linstor-server {
-      protobuf = pkgs-unstable.protobuf_23;
+      protobuf = pkgs-unstable.protobuf_24;
       jre = pkgs.jdk11_headless;
     };
     nixmoxer = callPackage ./nixmoxer { };
