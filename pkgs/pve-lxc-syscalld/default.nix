@@ -1,15 +1,16 @@
 {
   lib,
   fetchgit,
-  pkg-config,
-  craneLib,
+  rustPlatform,
+  mkRegistry,
   systemdLibs
 }:
 
 let
-  isProxmoxRS = p: lib.hasPrefix "git+https://github.com/proxmox/proxmox-rs.git" p.source;
+  sources = import ./sources.nix;
+  registry = mkRegistry sources;
 in
-craneLib.buildPackage {
+rustPlatform.buildRustPackage rec {
   pname = "pve-lxc-syscalld";
   version = "1.3.0";
 
@@ -19,39 +20,65 @@ craneLib.buildPackage {
     hash = "sha256-SEFeeJgK0Qw7st9eK1k8g3gJkQ+li5Ucfdj1GWIjj1c=";
   };
   
-  postPatch = ''
-    rm -rf .cargo
+  # postPatch = ''
+  #   rm -rf .cargo
+  #   cp ${./Cargo.lock} Cargo.lock
+  #   cp ${./Cargo.toml} Cargo.toml
+  # '';
+
+  cargoLock = {
+    lockFile = ./Cargo.lock;
+    allowBuiltinFetchGit = true;
+  };
+  
+  prePatch = ''
+    rm .cargo/config.toml
+    cd termproxy
+    cat ${registry}/cargo-patches.toml >> Cargo.toml
     cp ${./Cargo.lock} Cargo.lock
-    cp ${./Cargo.toml} Cargo.toml
   '';
 
-  REPOID = "lol";
+  passthru.registry = registry;
 
-  cargoVendorDir = craneLib.vendorCargoDeps {
-    cargoLock = ./Cargo.lock;
-    overrideVendorGitCheckout =
-      ps: drv:
-      if (lib.any isProxmoxRS ps) then
-        (drv.overrideAttrs (_old: {
-          postPatch = ''
-            rm .cargo/config 
-          '';
-        }))
-      else
-        drv;
-  };
+  passthru.updateScript = [
+    ../update.py
+    pname
+    "--url"
+    src.url
+    "--prefix"
+    "pve-lxc-syscalld: bump version to"
+    "--root"
+    pname
+  ];
+
+  # REPOID = "lol";
+
+  # cargoVendorDir = craneLib.vendorCargoDeps {
+  #   cargoLock = ./Cargo.lock;
+  #   overrideVendorGitCheckout =
+  #     ps: drv:
+  #     if (lib.any isProxmoxRS ps) then
+  #       (drv.overrideAttrs (_old: {
+  #         postPatch = ''
+  #           rm .cargo/config 
+  #         '';
+  #       }))
+  #     else
+  #       drv;
+  # };
 
   buildInputs = [
+    registry
     systemdLibs
   ];
 
   meta = with lib; {
-    description = "";
-    homepage = "git://git.proxmox.com/?p=proxmox.git";
+    description = "seccomp syscall proxy for PVE LXC containers";
+    homepage = "git://git.proxmox.com/?p=pve-lxc-syscalld.git.git";
     maintainers = with maintainers; [
       camillemndn
       julienmalka
     ];
-    mainProgram = "proxmox";
+    mainProgram = "pve-lxc-syscalld";
   };
 }
