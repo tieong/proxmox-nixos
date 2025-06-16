@@ -15,9 +15,15 @@
   {
     name = "librust-perlmod-dev";
     url = "git://git.proxmox.com/git/perlmod.git";
-    rev = "5dbce0d3d3d89a9fa2d470444d1c1c8b3a780cbe";
+
+    # rev = "5dbce0d3d3d89a9fa2d470444d1c1c8b3a780cbe";
+    # patches = [ ../perlmod/remove_safe_putenv.patch ];
+    # sha256 = "05q7bqf93qyz9054wb7x7kx59v7ssc41p79rzkf1g8fzws7ga8q7";
+
+    rev = "1544fc13d7196152409467db416f1791ed121fc3";
     patches = [ ../perlmod/remove_safe_putenv.patch ];
-    sha256 = "05q7bqf93qyz9054wb7x7kx59v7ssc41p79rzkf1g8fzws7ga8q7";
+    sha256 = "03m75w3hz0qx05kz09fn9hgaxiyya72bxv3id4mcjj10csshhyzw";
+
     crates = [
       {
         name = "perlmod";
@@ -28,9 +34,15 @@
   {
     name = "librust-perlmod-macro-dev";
     url = "git://git.proxmox.com/git/perlmod.git";
-    rev = "5dbce0d3d3d89a9fa2d470444d1c1c8b3a780cbe";
+
+    # rev = "5dbce0d3d3d89a9fa2d470444d1c1c8b3a780cbe";
+    # patches = [ ../perlmod/remove_safe_putenv.patch ];
+    # sha256 = "05q7bqf93qyz9054wb7x7kx59v7ssc41p79rzkf1g8fzws7ga8q7";
+
+    rev = "3420df88a8edf6c26264a7534a27d4105de194f7";
     patches = [ ../perlmod/remove_safe_putenv.patch ];
-    sha256 = "05q7bqf93qyz9054wb7x7kx59v7ssc41p79rzkf1g8fzws7ga8q7";
+    sha256 = "0i26mdqgnmg119m6m4mwl256pcpgh4xk8njsi8dyl9gmf5hv8cni";
+
     crates = [
       {
         name = "perlmod-macro";
