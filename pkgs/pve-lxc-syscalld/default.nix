@@ -2,14 +2,9 @@
   lib,
   fetchgit,
   rustPlatform,
-  mkRegistry,
   systemdLibs
 }:
 
-let
-  sources = import ./sources.nix;
-  registry = mkRegistry sources;
-in
 rustPlatform.buildRustPackage rec {
   pname = "pve-lxc-syscalld";
   version = "1.3.0";
@@ -20,12 +15,6 @@ rustPlatform.buildRustPackage rec {
     hash = "sha256-SEFeeJgK0Qw7st9eK1k8g3gJkQ+li5Ucfdj1GWIjj1c=";
   };
   
-  # postPatch = ''
-  #   rm -rf .cargo
-  #   cp ${./Cargo.lock} Cargo.lock
-  #   cp ${./Cargo.toml} Cargo.toml
-  # '';
-
   cargoLock = {
     lockFile = ./Cargo.lock;
     allowBuiltinFetchGit = true;
@@ -36,34 +25,16 @@ rustPlatform.buildRustPackage rec {
     cp ${./Cargo.lock} Cargo.lock
   '';
 
-  # passthru.registry = registry;
-
-  # passthru.updateScript = [
-  #   ../update.py
-  #   pname
-  #   "--url"
-  #   src.url
-  #   "--prefix"
-  #   "pve-lxc-syscalld: bump version to"
-  #   "--root"
-  #   pname
-  # ];
-
-  # REPOID = "lol";
-
-  # cargoVendorDir = craneLib.vendorCargoDeps {
-  #   cargoLock = ./Cargo.lock;
-  #   overrideVendorGitCheckout =
-  #     ps: drv:
-  #     if (lib.any isProxmoxRS ps) then
-  #       (drv.overrideAttrs (_old: {
-  #         postPatch = ''
-  #           rm .cargo/config 
-  #         '';
-  #       }))
-  #     else
-  #       drv;
-  # };
+  passthru.updateScript = [
+    ../update.py
+    pname
+    "--url"
+    src.url
+    "--prefix"
+    "pve-lxc-syscalld: bump version to"
+    "--root"
+    pname
+  ];
 
   buildInputs = [
     systemdLibs
