@@ -76,14 +76,6 @@ stdenv.mkDerivation (finalAttrs: {
     "-Dsystemd-unitdir=${placeholder "out"}/lib/systemd/system"
   ];
 
-  # postPatch = ''
-  #   find src/lxc -type f | xargs sed -i \
-  #     -e "s|/bin/sh|${bash}/bin/sh|" \
-  #     -e "s|apparmor-parser|${apparmor-parser}/bin/apparmor_parser|" \
-  #     -e "s|newgidmap|${shadow}/bin/newgidmap|" \
-  #     -e "s|newuidmap|${shadow}/bin/newuidmap|"
-  # '';
-
   # /run/current-system/sw/share
   postInstall = ''
     substituteInPlace $out/etc/lxc/lxc --replace-fail "$out/etc/lxc" "/etc/lxc"
@@ -101,12 +93,12 @@ stdenv.mkDerivation (finalAttrs: {
       -e "s|rm|${coreutils}/bin/rm|"
   '';
 
-  # postFixup = ''
-  #     for bin in $out/bin/lxc; do
-  #       wrapProgram $bin \
-  #         --prefix PATH : ${lib.makeBinPath [ bash apparmor-parser shadow ]}
-  #     done
-  # '';
+  postFixup = ''
+      for bin in $out/bin/*; do
+        wrapProgram $bin \
+          --prefix PATH : ${lib.makeBinPath [ bash apparmor-parser shadow ]}
+      done
+  '';
 
   enableParallelBuilding = true;
 
