@@ -47,6 +47,8 @@ stdenv.mkDerivation (finalAttrs: {
     libcap
     libseccomp
     libselinux
+    shadow
+    apparmor-parser
     openssl
     systemd
   ];
