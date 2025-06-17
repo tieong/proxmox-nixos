@@ -15,7 +15,7 @@
   nixosTests,
   openssl,
   shadow,
-  apparmor-parser
+  apparmor-parser,
   pkg-config,
   coreutils,
   systemd,
