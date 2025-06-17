@@ -76,7 +76,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   postPatch = ''
     find src/lxc -type f | xargs sed -i \
-      -e "s|/bin/sh|${coreutils}/bin/sh|" \
+      -e "s|/bin/sh|${bash}/bin/sh|" \
       -e "s|apparmor-parser|${apparmor-parser}/bin/apparmor_parser|" \
       -e "s|newgidmap|${shadow}/bin/newgidmap|" \
       -e "s|newuidmap|${shadow}/bin/newuidmap|"
