@@ -70,7 +70,7 @@ stdenv.mkDerivation (finalAttrs: {
     "-Dinstall-state-dirs=false"
     "-Dspecfile=false"
     "-Dtools-multicall=false"
-    "-Dtools=false"
+    "-Dtools=true"
     "-Dusernet-config-path=/etc/lxc/lxc-usernet"
     "-Ddistrosysconfdir=${placeholder "out"}/etc/lxc"
     "-Dsystemd-unitdir=${placeholder "out"}/lib/systemd/system"
