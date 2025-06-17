@@ -16,6 +16,7 @@
   openssl,
   shadow,
   apparmor-parser,
+  bash,
   pkg-config,
   coreutils,
   systemd,
@@ -49,8 +50,6 @@ stdenv.mkDerivation (finalAttrs: {
     libcap
     libseccomp
     libselinux
-    shadow
-    apparmor-parser
     openssl
     systemd
   ];
@@ -89,6 +88,7 @@ stdenv.mkDerivation (finalAttrs: {
 
     sed -i $out/libexec/lxc/lxc-containers \
       -e "s|touch|${coreutils}/bin/touch|" \
+      -e "s|/bin/sh|${coreutils}/bin/sh|" \
       -e "s|rm|${coreutils}/bin/rm|"
   '';
 
