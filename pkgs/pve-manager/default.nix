@@ -91,6 +91,8 @@ perl538.pkgs.toPerlModule (
       sed -i configs/country.pl -e "s|/usr|${tzdata}|"
       #cp PVE/pvecfg.pm{.in,}
       sed -i www/manager6/Makefile -e "/ESLINT/d" -e "s|/usr/bin/asciidoc-pve|${pve-docs}/bin/asciidoc-pve|"
+  	  sed -i aplinfo/Makefile \
+        -e 's|sq keyring join --binary -o $@.tmp|sq keyring merge --output $@.tmp|'
     '';
 
     buildInputs = [
