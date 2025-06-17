@@ -102,7 +102,7 @@ stdenv.mkDerivation (finalAttrs: {
   '';
 
   postFixup = ''
-      for bin in $out/bin/*; do
+      for bin in $out/bin/lxc; do
         wrapProgram $bin \
           --prefix PATH : ${lib.makeBinPath [ bash apparmor-parser shadow ]}
       done
