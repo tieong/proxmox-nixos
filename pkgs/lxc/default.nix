@@ -76,7 +76,10 @@ stdenv.mkDerivation (finalAttrs: {
 
   postPatch = ''
     find src/lxc -type f | xargs sed -i \
-      -e "s|/bin/sh|${coreutils}/bin/sh|"
+      -e "s|/bin/sh|${coreutils}/bin/sh|" \
+      -e "s|apparmor-parser|${apparmor-parser}/bin/apparmor_parser|" \
+      -e "s|newgidmap|${shadow}/bin/newgidmap|" \
+      -e "s|newuidmap|${shadow}/bin/newuidmap|"
   '';
 
   # /run/current-system/sw/share
@@ -95,19 +98,6 @@ stdenv.mkDerivation (finalAttrs: {
       -e "s|touch|${coreutils}/bin/touch|" \
       -e "s|rm|${coreutils}/bin/rm|"
   '';
-
-  # postFixup = ''
-  #     for bin in $out/bin/lxc $out/bin/init.lxc $out/bin/lxc-checkconfig $out/bin/lxc-update-config $out/bin/lxc-usernsexec; do
-  #       wrapProgram $bin \
-  #         --prefix PATH : ${
-  #           lib.makeBinPath [
-  #             apparmor-parser
-  #             shadow
-  #             bash
-  #           ]
-  #         } \
-  #     done
-  #   '';
 
   enableParallelBuilding = true;
 
