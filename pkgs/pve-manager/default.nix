@@ -31,6 +31,7 @@
   sqlite,
   wget,
   bash,
+  sequoia-sq,
   zstd,
   util-linux,
   system-sendmail,
@@ -84,7 +85,7 @@ perl538.pkgs.toPerlModule (
         -e '/pkg-info/d' \
         -e '/log/d' \
         -e '/architecture/d' \
-        -e 's/aplinfo PVE bin www services configs network-hooks test/PVE bin www configs test/'
+        -e 's/aplinfo PVE bin www services configs network-hooks test/aplinfo PVE bin www configs test/'
       sed -i bin/Makefile -e '/pod2man/,+1d' -e '/install -d \$(MAN1DIR)/,+7d'
       patchShebangs configs/country.pl
       sed -i configs/country.pl -e "s|/usr|${tzdata}|"
@@ -96,6 +97,7 @@ perl538.pkgs.toPerlModule (
       perlEnv
       nodePackages.eslint
       graphviz
+      sequoia-sq
       makeWrapper
     ];
     propagatedBuildInputs = perlDeps;
@@ -116,8 +118,6 @@ perl538.pkgs.toPerlModule (
     postInstall = ''
       rm -r $out/var $out/bin/pve{upgrade,update,version,7to8}
       sed -i $out/{bin/*,share/pve-manager/helpers/pve-startall-delay} -e "s/-T//"
-      cp ${./proxmox-release-bookworm.gpg} $out/etc/proxmox-release-bookworm.gpg
-      cp ${./turnkey-release-keyring.gpg} $out/etc/turnkey-release-keyring.gpg
     '';
 
     postFixup = ''
@@ -146,9 +146,6 @@ perl538.pkgs.toPerlModule (
 
       find $out/bin -type f | xargs sed -i \
         -e "/ENV{'PATH'}/d"
-
-      sed -i $out/${perl538.libPrefix}/${perl538.version}/PVE/APLInfo.pm \
-        -e "s|/usr/share/doc/pve-manager/trustedkeys.gpg|$out/etc/proxmox-release-bookworm.gpg|"
 
       for bin in $out/{bin/*,share/pve-manager/helpers/pve-startall-delay}; do
         wrapProgram $bin \
