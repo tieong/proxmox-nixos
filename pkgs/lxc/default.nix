@@ -74,6 +74,11 @@ stdenv.mkDerivation (finalAttrs: {
     "-Dsystemd-unitdir=${placeholder "out"}/lib/systemd/system"
   ];
 
+  postPatch = ''
+    find src/lxc -type f | xargs sed -i \
+      -e "s|/bin/sh|${coreutils}/bin/sh|"
+  '';
+
   # /run/current-system/sw/share
   postInstall = ''
     substituteInPlace $out/etc/lxc/lxc --replace-fail "$out/etc/lxc" "/etc/lxc"
@@ -88,7 +93,6 @@ stdenv.mkDerivation (finalAttrs: {
 
     sed -i $out/libexec/lxc/lxc-containers \
       -e "s|touch|${coreutils}/bin/touch|" \
-      -e "s|/bin/sh|${coreutils}/bin/sh|" \
       -e "s|rm|${coreutils}/bin/rm|"
   '';
 
