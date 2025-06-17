@@ -8,6 +8,21 @@
 
       bridges = [ "vmbr0" ];
     };
+
+    users.users.root = {
+      subUidRanges = [
+        {
+          count = 65536;
+          startUid = 100000;
+        }
+      ];
+      subGidRanges = [
+        {
+          count = 65536;
+          startGid = 100000;
+        }
+      ];
+    };
   };
 
   testScript = ''
