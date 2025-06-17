@@ -96,7 +96,7 @@ stdenv.mkDerivation (finalAttrs: {
   postFixup = ''
       for bin in $out/bin/*; do
         wrapProgram $bin \
-          --prefix PATH : ${lib.makeBinPath [ bash apparmor-parser shadow ]}
+          --prefix PATH : ${lib.makeBinPath [ bash apparmor-parser "/run/wrappers" ]}
       done
   '';
 
