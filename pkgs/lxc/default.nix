@@ -2,6 +2,7 @@
   lib,
   stdenv,
   fetchFromGitHub,
+  makeWrapper,
 
   bashInteractive,
   dbus,
@@ -52,6 +53,7 @@ stdenv.mkDerivation (finalAttrs: {
     libselinux
     openssl
     systemd
+    makeWrapper
   ];
 
   patches = [
