@@ -74,13 +74,13 @@ stdenv.mkDerivation (finalAttrs: {
     "-Dsystemd-unitdir=${placeholder "out"}/lib/systemd/system"
   ];
 
-  postPatch = ''
-    find src/lxc -type f | xargs sed -i \
-      -e "s|/bin/sh|${bash}/bin/sh|" \
-      -e "s|apparmor-parser|${apparmor-parser}/bin/apparmor_parser|" \
-      -e "s|newgidmap|${shadow}/bin/newgidmap|" \
-      -e "s|newuidmap|${shadow}/bin/newuidmap|"
-  '';
+  # postPatch = ''
+  #   find src/lxc -type f | xargs sed -i \
+  #     -e "s|/bin/sh|${bash}/bin/sh|" \
+  #     -e "s|apparmor-parser|${apparmor-parser}/bin/apparmor_parser|" \
+  #     -e "s|newgidmap|${shadow}/bin/newgidmap|" \
+  #     -e "s|newuidmap|${shadow}/bin/newuidmap|"
+  # '';
 
   # /run/current-system/sw/share
   postInstall = ''
@@ -97,6 +97,13 @@ stdenv.mkDerivation (finalAttrs: {
     sed -i $out/libexec/lxc/lxc-containers \
       -e "s|touch|${coreutils}/bin/touch|" \
       -e "s|rm|${coreutils}/bin/rm|"
+  '';
+
+  postFixup = ''
+      for bin in $out/bin/*; do
+        wrapProgram $bin \
+          --prefix PATH : ${lib.makeBinPath [ bash apparmor-parser shadow ]}
+      done
   '';
 
   enableParallelBuilding = true;
