@@ -101,12 +101,12 @@ stdenv.mkDerivation (finalAttrs: {
       -e "s|rm|${coreutils}/bin/rm|"
   '';
 
-  postFixup = ''
-      for bin in $out/bin/lxc; do
-        wrapProgram $bin \
-          --prefix PATH : ${lib.makeBinPath [ bash apparmor-parser shadow ]}
-      done
-  '';
+  # postFixup = ''
+  #     for bin in $out/bin/lxc; do
+  #       wrapProgram $bin \
+  #         --prefix PATH : ${lib.makeBinPath [ bash apparmor-parser shadow ]}
+  #     done
+  # '';
 
   enableParallelBuilding = true;
 
