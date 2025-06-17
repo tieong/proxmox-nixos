@@ -116,6 +116,8 @@ perl538.pkgs.toPerlModule (
     postInstall = ''
       rm -r $out/var $out/bin/pve{upgrade,update,version,7to8}
       sed -i $out/{bin/*,share/pve-manager/helpers/pve-startall-delay} -e "s/-T//"
+      cp ${./proxmox-release-bookworm.gpg} $out/etc/proxmox-release-bookworm.gpg
+      cp ${./turnkey-release-keyring.gpg} $out/etc/turnkey-release-keyring.gpg
     '';
 
     postFixup = ''
@@ -144,6 +146,9 @@ perl538.pkgs.toPerlModule (
 
       find $out/bin -type f | xargs sed -i \
         -e "/ENV{'PATH'}/d"
+
+      sed -i $out/${perl538.libPrefix}/${perl538.version}/PVE/APLInfo.pm \
+        -e "s|/usr/share/doc/pve-manager/trustedkeys.gpg|$out/etc/proxmox-release-bookworm.gpg|"
 
       for bin in $out/{bin/*,share/pve-manager/helpers/pve-startall-delay}; do
         wrapProgram $bin \

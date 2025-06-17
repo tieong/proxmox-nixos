@@ -64,8 +64,6 @@ perl538.pkgs.toPerlModule (
     postInstall = ''
       cp ${pve-container}/.bin/pct $out/bin
       cp ${pve-qemu-server}/.bin/* $out/bin
-      cp ${./proxmox-release-bookworm.gpg} $out/etc/proxmox-release-bookworm.gpg
-      cp ${./turnkey-release-keyring.gpg} $out/etc/turnkey-release-keyring.gpg
       sed -i $out/bin/pct \
         -e "s/-T//" \
         -e "1s|$| -I$out/${perl538.libPrefix}/${perl538.version}|"
@@ -73,8 +71,6 @@ perl538.pkgs.toPerlModule (
     '';
 
     postFixup = ''
-      sed -i $out/${perl538.libPrefix}/${perl538.version}/PVE/APLInfo.pm \
-        -e "s|/usr/share/doc/pve-manager/trustedkeys.gpg|$out/etc/proxmox-release-bookworm.gpg|"
       for bin in $out/bin/*; do
         wrapProgram $bin \
           --prefix PATH : ${lib.makeBinPath [ pve-qemu ]} \
