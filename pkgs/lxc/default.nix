@@ -92,6 +92,19 @@ stdenv.mkDerivation (finalAttrs: {
       -e "s|rm|${coreutils}/bin/rm|"
   '';
 
+  postFixup = ''
+      for bin in $out/bin/lxc $out/bin/init.lxc $out/bin/lxc-checkconfig $out/bin/lxc-update-config $out/bin/lxc-usernsexec; do
+        wrapProgram $bin \
+          --prefix PATH : ${
+            lib.makeBinPath [
+              apparmor-parser
+              shadow
+              bash
+            ]
+          } \
+      done
+    '';
+
   enableParallelBuilding = true;
 
   doCheck = true;
