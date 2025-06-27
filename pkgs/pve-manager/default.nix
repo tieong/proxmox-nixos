@@ -103,6 +103,7 @@ perl538.pkgs.toPerlModule (
       nodePackages.eslint
       graphviz
       sequoia-sq
+      gnupg
       makeWrapper
     ];
     propagatedBuildInputs = perlDeps;
