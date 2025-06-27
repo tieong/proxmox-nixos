@@ -3,7 +3,7 @@
 let
   alpineTemplate = pkgs.fetchurl {
     url = "http://download.proxmox.com/images/system/alpine-3.21-default_20241217_amd64.tar.xz";
-    hash = "sha256-plre/mIHdIgU4xWU+9xErP+L4i460ZbcKq8iy2n4HT8=";
+    hash = "sha256-E7AucUeLh7B41c7UuChKAY6Kv5z9fqvQl8z37X7+D60=";
   };
 in
 {
