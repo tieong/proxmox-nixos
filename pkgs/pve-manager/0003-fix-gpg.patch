@@ -1,0 +1,27 @@
+From 8c677c0da6ab89f957a641dce3c186da40127a41 Mon Sep 17 00:00:00 2001
+From: Thomas Ieong <th.ieong@free.fr>
+Date: Fri, 27 Jun 2025 19:01:30 +0200
+Subject: [PATCH] fix gpg
+
+---
+ aplinfo/Makefile | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/aplinfo/Makefile b/aplinfo/Makefile
+index 56af6dfc..ab7e9a5b 100644
+--- a/aplinfo/Makefile
++++ b/aplinfo/Makefile
+@@ -21,8 +21,9 @@ update:
+ 	mv aplinfo.dat.tmp aplinfo.dat
+ 
+ trustedkeys.gpg: $(TRUSTED_KEYS)
+-	sq keyring join --binary -o $@.tmp *.pubkey proxmox-release-bookworm.gpg
++	sq keyring merge --output $@.tmp $(TRUSTED_KEYS)
+ 	mv $@.tmp $@
++       gpg --dearmor < $@ > $@
+ 
+ .PHONY: clean
+ clean:
+-- 
+2.49.0
+
