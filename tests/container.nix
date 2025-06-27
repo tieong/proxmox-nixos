@@ -1,10 +1,7 @@
 { pkgs, ... }:
 
 let
-  alpineTemplate = pkgs.fetchurl {
-    url = "http://download.proxmox.com/images/system/alpine-3.21-default_20241217_amd64.tar.xz";
-    hash = "sha256-E7AucUeLh7B41c7UuChKAY6Kv5z9fqvQl8z37X7+D60=";
-  };
+  alpineTemplate = "alpine-3.21-default_20241217_amd64.tar.xz"
 in
 {
   name = "pve-container";
@@ -64,11 +61,11 @@ in
   testScript = ''
    machine.start()
    machine.wait_for_unit("pveproxy.service")
-   machine.succed("cp ${alpineTemplate} /var/lib/vz/template/cache/alpine-3.21-default_20241217_amd64.tar.xz")
-   machine.succeed("pveam list local")
+   assert "update successful" in machine.succeed("pveam update")
+   machine.succeed("pveam download local ${alpineTemplate}")
    args = (
        "150",
-       "local:vztmpl/alpine-3.21-default_20241217_amd64.tar.xz",
+       "local:vztmpl/${alpineTemplate}",
        "--hostname=alpine-test",
        "--ostype=alpine",
        "--unprivileged=1",
@@ -76,6 +73,6 @@ in
        "--storage=local"
    )
    machine.succeed(f"pct create {' '.join(args)}")
-   machine.succeed("pct start 150 --debug")
+   machine.succeed("pct start 150")
   '';
 }
