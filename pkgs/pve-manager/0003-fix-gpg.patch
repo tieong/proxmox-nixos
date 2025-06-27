@@ -18,7 +18,7 @@ index 56af6dfc..ab7e9a5b 100644
 -	sq keyring join --binary -o $@.tmp *.pubkey proxmox-release-bookworm.gpg
 +	sq keyring merge --output $@.tmp $(TRUSTED_KEYS)
  	mv $@.tmp $@
-+       gpg --dearmor < $@ > $@
++	gpg --dearmor < $@ > $@
  
  .PHONY: clean
  clean:
