@@ -19,7 +19,7 @@ let
     pve-firewall
     pve-guest-common
     pve-qemu-server
-    (pve-storage.override { inherit enableLinstor; })
+    (lib.hiPrio (pve-storage.override { inherit enableLinstor; }))
   ];
   perlEnv = perl538.withPackages (_: perlDeps);
 in

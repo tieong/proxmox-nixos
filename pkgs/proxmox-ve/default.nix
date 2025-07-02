@@ -28,7 +28,7 @@ buildEnv rec {
     (pve-ha-manager.override { inherit enableLinstor; })
     (pve-manager.override { inherit enableLinstor; })
     pve-qemu-server
-    (pve-storage.override { inherit enableLinstor; })
+    (lib.hiPrio (pve-storage.override { inherit enableLinstor; }))
     termproxy
     vncterm
     wget
